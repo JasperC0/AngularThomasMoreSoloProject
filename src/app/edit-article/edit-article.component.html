@@ -1,0 +1,54 @@
+<form #registerForm="ngForm" (ngSubmit)="createOrUpdateArticle()">
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="article title" type="text" required minlength="2" [(ngModel)]="selectedArticle.title"
+                name="ArticleTitle" />
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="article sub tittle" type="text" required minlength="2" [(ngModel)]="selectedArticle.subTitle"
+                name="ArticleSubTitle" />
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="article short summary" type="text" required minlength="2" [(ngModel)]="selectedArticle.shortSummary"
+                name="ArticleShortSummary" />
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="article body" type="text" required minlength="2" [(ngModel)]="selectedArticle.body"
+                name="ArticleBody" />
+        </mat-form-field>
+    </p>
+
+    <p>Tag:<select #tagSelect (change)="onTagChange(tagSelect.value)">
+        <option [value]=0>as is</option>
+        <option *ngFor="let t of (tags | async)" [value]=t.tagID >{{t.name}}</option>
+    </select></p>
+
+    <p>Status:<select #statusSelect (change)="onStatusChange(statusSelect.value)">
+        <option [value]=0>as is</option>
+        <option [value]=3 >Draft</option>
+        <option [value]=2 >To review</option>
+    </select></p>
+    <div *ngIf="selectedArticle.articleID == 0;">
+        <p>
+            <button mat-raised-button color="primary" type="submit"
+                [disabled]="!registerForm.form.valid">Create</button>
+        </p>
+    </div>
+
+    <div *ngIf="selectedArticle.articleID != 0;">
+        <p>
+            <button mat-raised-button color="primary" type="submit"
+                [disabled]="!registerForm.form.valid">update</button>
+        </p>
+    </div>
+</form>
+
+<ul>
+    <li *ngFor="let a of (articles | async).reverse()">{{a.title}} <button (click)="selectUpdate(a)">edit</button></li>
+</ul>

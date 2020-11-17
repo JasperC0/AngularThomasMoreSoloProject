@@ -1,0 +1,29 @@
+<form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="First name" type="text" required minlength="2" [(ngModel)]="user.firstName" name="firstName" />
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="Last name" type="text" required [(ngModel)]="user.lastName" name="lastname" />
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="email" type="text" required [(ngModel)]="user.email" name="email" />
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="username" type="text" required [(ngModel)]="user.username" name="username" />
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="password" type="text" required [(ngModel)]="user.password" name="password" />
+        </mat-form-field>
+    </p>
+    <p><button mat-raised-button color="primary" type="submit"
+            [disabled]="!registerForm.form.valid || submitted">Submit</button></p>
+</form>

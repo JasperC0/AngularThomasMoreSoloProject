@@ -1,0 +1,9 @@
+<app-article-details *ngIf="selectedArticle" [article]="selectedArticle"></app-article-details>
+
+<select #tagSelect (change)="onSelectChange(tagSelect.value)">
+    <option *ngFor="let t of (tags | async)" [value]=t.tagID >{{t.name}}</option>
+</select>
+
+<ul>
+    <li *ngFor="let a of (shownArticles | async).reverse()">{{a.title}} <button (click)="showDetailArticle(a)">read more</button><p>{{a.shortSummary}}</p></li>
+</ul>

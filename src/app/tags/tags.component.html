@@ -1,0 +1,31 @@
+<form #registerForm="ngForm" (ngSubmit)="createOrUpdateTag()">
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="New Tag Name" type="text" required minlength="2" [(ngModel)]="tagName"
+                name="tagName" />
+        </mat-form-field>
+    </p>
+    <div *ngIf="selectedTag == null;">
+        <p>
+            <button mat-raised-button color="primary" type="submit"
+                [disabled]="!registerForm.form.valid">Create</button>
+        </p>
+    </div>
+
+    <div *ngIf="selectedTag != null;">
+        <p>
+            <button mat-raised-button color="primary" type="submit"
+                [disabled]="!registerForm.form.valid">update</button>
+        </p>
+    </div>
+</form>
+
+
+
+<button (click)="reset()">reset selected tag</button>
+
+<ul>
+    <li *ngFor="let t of (tags | async)">{{t.name}} <p><button (click)="selectUpdate(t)">select for update</button>
+            <button (click)="deleteTag(t.tagID)">delete</button></p>
+    </li>
+</ul>
