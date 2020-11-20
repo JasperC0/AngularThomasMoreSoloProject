@@ -8,7 +8,6 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   addUser(user: User) {
-    console.log(user)
     return this.http.post<User>("https://localhost:5001/api/user", user);
   }
 }

@@ -30,7 +30,7 @@ import { DeleteJournalistModule } from './delete-journalist/delete-journalist.mo
 import { PublishArticleComponent } from './publish-article/publish-article.component';
 import { PublishArticleModule } from './publish-article/publish-article.module';
 
-localStorage.setItem("role", "0") 
+
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },

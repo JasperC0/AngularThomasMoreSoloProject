@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RegisterService} from 'src/app/register/register.service'
 import { User } from '../models/user/user.model';
+import { AddJournalistService } from './add-journalist.service';
 
 @Component({
   selector: 'app-add-journalist',
@@ -10,7 +11,7 @@ import { User } from '../models/user/user.model';
 export class AddJournalistComponent implements OnInit {
   user: User = new User(0,"","","","","",2 , "");
 
-  constructor(private _registerService: RegisterService) { }
+  constructor(private _addJournalistService: AddJournalistService) { }
 
   submitted: boolean = false;
 
@@ -19,7 +20,6 @@ export class AddJournalistComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    //console.log(this.user)
-    this._registerService.addUser(this.user).subscribe(result => {console.log(result)})
+    this._addJournalistService.addJournalist(this.user).subscribe(result => {console.log(result)})
   }
 }

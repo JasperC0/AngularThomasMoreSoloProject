@@ -1,8 +1,23 @@
 <app-article-details *ngIf="selectedArticle" [article]="selectedArticle"></app-article-details>
 
+<form #registerForm="ngForm" (ngSubmit)="onSubmit()">
 <select #tagSelect (change)="onSelectChange(tagSelect.value)">
+    <option [value]=0>All</option>
     <option *ngFor="let t of (tags | async)" [value]=t.tagID >{{t.name}}</option>
 </select>
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="title" type="text" [(ngModel)]="searchTitle" name="title" />
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="text" type="text" [(ngModel)]="searchBody" name="text" />
+        </mat-form-field>
+    </p>
+    <p><button>Filter</button></p>
+</form>
+
 
 <ul>
     <li *ngFor="let a of (shownArticles | async).reverse()">{{a.title}} <button (click)="showDetailArticle(a)">read more</button><p>{{a.shortSummary}}</p></li>

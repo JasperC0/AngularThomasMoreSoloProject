@@ -20,7 +20,6 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    //console.log(this.user)
-    this._registerService.addUser(this.user).subscribe(result => {console.log(result)})
+    this._registerService.addUser(this.user).subscribe()
   }
 }

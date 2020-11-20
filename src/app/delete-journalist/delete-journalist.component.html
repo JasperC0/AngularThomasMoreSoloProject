@@ -1,4 +1,4 @@
-<p><strong>WARNING! deleting a journalist also deletes all their articles regardless of status or tags!</strong></p>
+<p><strong>WARNING! deleting a journalist also deletes all their articles, and all comments and likes belonging to them and those articles</strong></p>
 
 <ul>
     <li *ngFor="let j of (journalists | async)">{{j.username}} <button (click)="delete(j.userID)">Delete user</button></li>

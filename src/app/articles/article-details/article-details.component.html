@@ -1,2 +1,33 @@
 <h1>{{article.title}}</h1>
+<h3>{{article.subTitle}}</h3>
 <p>{{article.body}}</p>
+
+<form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="comment" type="text" required minlength="2" [(ngModel)]="text" name="comment" />
+        </mat-form-field>
+    </p>
+    <p><button mat-raised-button color="primary" type="submit"
+            [disabled]="!registerForm.form.valid || submitted">Submit</button></p>
+</form>
+<p>This article is liked {{likes_amount}} time(s).</p>
+
+<div *ngIf="liked; else notLiked">
+    you have liked this article. <button (click)="likeAndUnlike()"  >Unlike</button>
+  </div>
+  
+  <ng-template #notLiked>
+    you haven't liked this article  <button (click)="likeAndUnlike()"  >Like</button>
+  </ng-template>
+
+<ul>
+    <li *ngFor="let c of (comments | async)">
+        {{c.user.username}}
+        <br/>
+        <p>{{c.text}}</p>
+        <hr/>
+    </li>
+</ul>
+
+
