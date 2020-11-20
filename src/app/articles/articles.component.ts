@@ -41,12 +41,12 @@ export class ArticlesComponent implements OnInit {
     }
     if(this.searchBody !== ""){
       console.log("body")
-    this.shownArticles = this.shownArticles.pipe(map((articleslist : Article[]) => articleslist.filter( a => a.body.includes(this.searchBody))))
+    this.shownArticles = this.shownArticles.pipe(map((articleslist : Article[]) => articleslist.filter( a => a.body.toLocaleLowerCase().includes(this.searchBody.toLocaleLowerCase()))))
     }
     if(this.searchTitle !== "")
     {
       console.log("title")
-      this.shownArticles = this.shownArticles.pipe(map((articleslist : Article[]) => articleslist.filter( a => a.body.includes(this.searchBody))))
+      this.shownArticles = this.shownArticles.pipe(map((articleslist : Article[]) => articleslist.filter( a => a.title.toLocaleLowerCase().includes(this.searchTitle.toLocaleLowerCase()))))
     }
   }
 
