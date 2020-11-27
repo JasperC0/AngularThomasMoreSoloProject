@@ -9,9 +9,9 @@
         </mat-form-field>
     </p>
     <p><button mat-raised-button color="primary" type="submit"
-            [disabled]="!registerForm.form.valid || submitted">Submit</button></p>
+            [disabled]="!registerForm.form.valid">Submit</button></p>
 </form>
-<p>This article is liked {{likes_amount}} time(s).</p>
+<p>This article is liked {{likesAmount}} time(s).</p>
 
 <div *ngIf="liked; else notLiked">
     you have liked this article. <button (click)="likeAndUnlike()"  >Unlike</button>

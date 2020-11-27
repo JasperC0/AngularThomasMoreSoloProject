@@ -18,44 +18,7 @@ export class DeleteJournalistService {
     return this.http.get<User[]>("https://localhost:5001/api/user/role/" + roleID);
   }
 
-  getArticlesFromUser(userID: number): Observable<Article[]> {
-    return this.http.get<Article[]>("https://localhost:5001/api/article/User/" + userID);
-  }
-
-  deleteArticle(articleID: number) {
-    return this.http.delete<Article>("https://localhost:5001/api/Article/" + articleID);
-  }
-
   deleteUser(userID: number) {
     return this.http.delete<User>("https://localhost:5001/api/User/" + userID);
   }
-
-  deleteComment(commentID: number) {
-    return this.http.delete<Comment>("https://localhost:5001/api/Comment/" + commentID);
-  }
-
-  deleteLike(likeID: number) {
-    return this.http.delete<Like>("https://localhost:5001/api/like/" + likeID);
-  }
-
-  getLikesFromUser(userID: number) {
-    return this.http.get<Like[]>("https://localhost:5001/api/likes/user/" + userID);
-
-  }
-
-  getLikesFromArticle(articleID: number) {
-    return this.http.get<Like[]>("https://localhost:5001/api/likes/article/" + articleID);
-
-  }
-
-  getCommentsFromUser(userID: number) {
-    return this.http.get<Comment[]>("https://localhost:5001/api/comment/user/" + userID);
-
-  }
-
-  getCommentsFromArticle(articleID: number) {
-    return this.http.get<Comment[]>("https://localhost:5001/api/comment/article/" + articleID);
-
-  }
-
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Article } from '../models/articles/article.model';
+import { HomeService } from './home.service'
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  newestArticles: Observable<Article[]>;
+
+  constructor(private _homeService: HomeService) { }
 
   ngOnInit(): void {
+    this.newestArticles = this._homeService.getLast5Articles()
   }
 
 }

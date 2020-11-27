@@ -4,15 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { AboutUsComponent } from './about-us/about-us.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from '@angular/material/list';
 import { ArticlesComponent } from './articles/articles.component';
 import { ArticlesModule } from './articles/articles.module'
 import { TagsModule } from './tags/tags.module'
-import { ArticlesService } from './articles/articles.service';
-import { HttpClient, HttpClientModule, HttpHandler, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SecurityInterceptor } from './Security/interceptor';
 import { ArticleDetailsComponent } from './articles/article-details/article-details.component';
 import { LoginComponent } from './login/login.component';
@@ -29,12 +27,12 @@ import { DeleteJournalistComponent } from './delete-journalist/delete-journalist
 import { DeleteJournalistModule } from './delete-journalist/delete-journalist.module';
 import { PublishArticleComponent } from './publish-article/publish-article.component';
 import { PublishArticleModule } from './publish-article/publish-article.module';
+import { HomeModule } from './home/home.module';
 
 
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'about', component: AboutUsComponent },
   { path: 'articles', component: ArticlesComponent },
   { path: 'article-detail', component: ArticleDetailsComponent },
   { path: 'login', component: LoginComponent },
@@ -48,9 +46,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    AboutUsComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +63,8 @@ const appRoutes: Routes = [
     AddJournalistModule,
     EditArticleModule,
     DeleteJournalistModule,
-    PublishArticleModule
+    PublishArticleModule,
+    HomeModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

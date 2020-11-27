@@ -18,7 +18,10 @@ export class PublishArticleDetailComponent implements OnInit {
   publish()
   {
     this.article.articleStatusID = 1
-    this._publishArticleService.updateArticle(this.article,this.article.articleID).subscribe()
+    this._publishArticleService.updateArticle(this.article,this.article.articleID).subscribe(() =>
+      //reload page to remove pulished article from article list
+      window.location.reload()
+    )
   }
 
 }

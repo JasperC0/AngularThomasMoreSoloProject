@@ -26,4 +26,9 @@ export class EditArticleService {
   updateArticle(article: Article, articleID: number) {
     return this.http.put<Article>("https://localhost:5001/api/article/" + articleID, article);
   }
+
+  deleteArticle(articleID: number)
+  {
+    return this.http.delete<Article>("https://localhost:5001/api/Article/" + articleID);
+  }
 }

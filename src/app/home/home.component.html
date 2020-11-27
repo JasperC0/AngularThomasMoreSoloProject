@@ -1,1 +1,9 @@
-<p>home works!</p>
+<p>Welcome!</p>
+
+<p>these are the newest articles, read more about them in the articles page:</p>
+
+<ul>
+    <li *ngFor="let a of (newestArticles | async)">
+        <p>{{a.title}}<br />{{a.shortSummary}}</p>
+    </li>
+</ul>

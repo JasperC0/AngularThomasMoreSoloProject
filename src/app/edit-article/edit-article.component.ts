@@ -22,7 +22,7 @@ export class EditArticleComponent implements OnInit {
     this.userid = parseInt(localStorage.getItem("user"))
     this.selectedArticle = new Article(0, "", "", "", "", 0, this.userid, 0)
     this.tags = this._editArticelesService.getTags()
-    this.articles = this._editArticelesService.getArticlesFromUser(this.userid).pipe(map((articleslist: Article[]) => articleslist.filter(a => a.articleStatusID === 3)))
+    this.resetArticles()
   }
 
   ngOnInit(): void {
@@ -31,25 +31,27 @@ export class EditArticleComponent implements OnInit {
   createOrUpdateArticle() {
     let validArticle = true
 
-
+    //check if new article has a status
     if (this.selectedArticle.articleStatusID == 0 || this.selectedArticle.articleStatusID == undefined) {
       validArticle = false
       alert("please give a valid status to the article")
     }
 
+    //check if new article has a tag
     if (this.selectedArticle.tagID == 0|| this.selectedArticle.tagID == undefined) {
       validArticle = false
       alert("please give a valid tag to the article")
     }
 
+    //check if article needs to be updated or created
     if (validArticle) {
       if (this.selectedArticle.articleID == 0) {
         this._editArticelesService.addArticle(this.selectedArticle).subscribe(a => {
-          this.resetWindow()
+          this.resetArticles()
         })
       }else{
         this._editArticelesService.updateArticle(this.selectedArticle,this.selectedArticle.articleID).subscribe(a => {
-          this.resetWindow()
+          this.resetArticles()
         })
       }
     }
@@ -74,14 +76,20 @@ export class EditArticleComponent implements OnInit {
 
   }
 
-  selectUpdate(a: Article) {
+  update(a: Article) {
     this.selectedArticle = a;
     this.originalStatus = this.selectedArticle.articleStatusID
     this.originalTag = this.selectedArticle.tagID
-    console.log(this.selectedArticle)
   }
 
-  resetWindow() {
-    window.location.reload();
+  delete(a: Article)
+  {
+    this._editArticelesService.deleteArticle(a.articleID).subscribe(() =>
+      this.resetArticles()
+    )
+  }
+
+  resetArticles() {
+    this.articles = this._editArticelesService.getArticlesFromUser(this.userid).pipe(map((articleslist: Article[]) => articleslist.filter(a => a.articleStatusID === 3)))
   }
 }

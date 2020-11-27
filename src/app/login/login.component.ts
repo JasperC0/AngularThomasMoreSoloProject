@@ -9,7 +9,6 @@ import { AuthenticateService } from '../Security/authenticate.service'
 })
 export class LoginComponent implements OnInit {
 
-  submitted = false;
   userLogin: UserLogin = new UserLogin('', '');
 
   constructor(private _authenticateService: AuthenticateService) { }
@@ -18,11 +17,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
     this._authenticateService.authenticate(this.userLogin).subscribe(result => {
+      //set storage for menu and API security
       localStorage.setItem("token", result.token);
       localStorage.setItem("role", result.roleID.toString()) 
       localStorage.setItem("user", result.userID.toString())
+      //reload page so menu adapts
+      window.location.reload()
     }, error=> {alert("Username or password is incorrect")});
+
   }
 }

@@ -24,43 +24,36 @@ export class TagsComponent implements OnInit {
 
   deleteTag(tagID: number) {
     this._tagsService.deleteTag(tagID).subscribe(t => {
-      this.resetWindow()
-    }
-    )
+      this.resetTags()
+    })
   }
 
   createOrUpdateTag() {
-    if(this.tagID == 0){
-    this._tagsService.addTag(new Tag(0,this.tagName)).subscribe(t => {
-      this.resetWindow()
+    if (this.tagID == 0) {
+      this._tagsService.addTag(new Tag(0, this.tagName)).subscribe(t => {
+        this.resetTags()
+      })
     }
-      
-    )
-    
+    else {
+      this.selectedTag.name = this.tagName
+      this._tagsService.updateTag(this.selectedTag, this.tagID).subscribe()
+    }
   }
-  else{
-    this.selectedTag.name = this.tagName
-    this._tagsService.updateTag(this.selectedTag,this.tagID).subscribe()
-  }
-}
 
-  selectUpdate(t:Tag) {
+  selectUpdate(t: Tag) {
     this.selectedTag = t;
     this.tagID = this.selectedTag.tagID
     this.tagName = this.selectedTag.name
-    console.log(this.selectedTag)
   }
 
-  reset()
-  {
-    this.selectedTag =null
+  reset() {
+    this.selectedTag = null
     this.tagID = 0
     this.tagName = ""
   }
 
-  resetWindow()
-  {
-    window.location.reload();
+  resetTags() {
+    this.tags = this._tagsService.getTags();
   }
 
 }

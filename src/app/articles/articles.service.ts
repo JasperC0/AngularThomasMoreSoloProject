@@ -11,12 +11,10 @@ export class ArticlesService {
 
   constructor(private http: HttpClient) { }
 
-  //gets all articles
   getArticles(): Observable<Article[]> {
     return this.http.get<Article[]>("https://localhost:5001/api/article");
   }
 
-  //gets all tags for filtering
   getTags(): Observable<Tag[]>{
     return this.http.get<Tag[]>("https://localhost:5001/api/tag");
   }
@@ -42,7 +40,6 @@ export class ArticlesService {
   }
 
   updateLike(like: Like) {
-    console.log(like)
     return this.http.put<Like>("https://localhost:5001/api/like/" + like.likeID, like);
   }
 }

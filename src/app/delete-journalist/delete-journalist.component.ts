@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Article } from '../models/articles/article.model';
 import { User } from '../models/user/user.model';
 import { DeleteJournalistService } from './delete-journalist.service';
@@ -21,12 +22,8 @@ export class DeleteJournalistComponent implements OnInit {
   }
 
   delete(userID) { 
-    this._deleteJournalistService.deleteUser(userID).subscribe(d =>{
-      this.resetWindow()
+    this._deleteJournalistService.deleteUser(userID).subscribe(() =>{
+      this.journalists = this._deleteJournalistService.getUsersFromRole(2)
     })
-  }
-
-  resetWindow() {
-    window.location.reload();
   }
 }

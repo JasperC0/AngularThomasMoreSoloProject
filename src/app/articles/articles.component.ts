@@ -4,8 +4,8 @@ import { ArticlesService } from 'src/app/articles/articles.service'
 import { Article } from 'src/app/models/articles/article.model';
 import { map } from 'rxjs/operators';
 import { Tag } from 'src/app/models/tag/tag.model';
-import { Router } from '@angular/router';
-import { ConstantPool } from '@angular/compiler';
+import { Like } from '../models/like/like.model';
+import { Comment } from '../models/comment/comment.model';
 
 @Component({
   selector: 'app-articles',
@@ -17,46 +17,41 @@ export class ArticlesComponent implements OnInit {
   shownArticles: Observable<Article[]>;
   tags: Observable<Tag[]>;
   selectedArticle: Article = null;
-  tag: number =0;
+  tag: number = 0;
   searchTitle: string = "";
   searchBody: string = "";
+  comments: Observable<Comment[]>;
+  likes: Observable<Like[]>
 
   constructor(private _articelesService: ArticlesService) {
-    this.articles = this._articelesService.getArticles().pipe(map((articleslist : Article[]) => articleslist.filter( a => a.articleStatusID === 1)))
-    this.tags= this._articelesService.getTags();
+    this.articles = this._articelesService.getArticles().pipe(map((articleslist: Article[]) => articleslist.filter(a => a.articleStatusID === 1)))
+    this.tags = this._articelesService.getTags();
     this.shownArticles = this.articles
-    console.log(this.articles)
   }
 
   ngOnInit(): void {
   }
 
-  onSubmit()
-  {
+  filter() {
     this.shownArticles = this.articles
-    if(this.tag != 0)
-    {
-      console.log("tag")
-      this.shownArticles = this.shownArticles.pipe(map((articleslist : Article[]) => articleslist.filter( a => a.tagID.toString() === this.tag.toString())))
+    if (this.tag != 0) {
+      this.shownArticles = this.shownArticles.pipe(map((articleslist: Article[]) => articleslist.filter(a => a.tagID.toString() === this.tag.toString())))
     }
-    if(this.searchBody !== ""){
-      console.log("body")
-    this.shownArticles = this.shownArticles.pipe(map((articleslist : Article[]) => articleslist.filter( a => a.body.toLocaleLowerCase().includes(this.searchBody.toLocaleLowerCase()))))
+    if (this.searchBody !== "") {
+      this.shownArticles = this.shownArticles.pipe(map((articleslist: Article[]) => articleslist.filter(a => a.body.toLocaleLowerCase().includes(this.searchBody.toLocaleLowerCase()))))
     }
-    if(this.searchTitle !== "")
-    {
-      console.log("title")
-      this.shownArticles = this.shownArticles.pipe(map((articleslist : Article[]) => articleslist.filter( a => a.title.toLocaleLowerCase().includes(this.searchTitle.toLocaleLowerCase()))))
+    if (this.searchTitle !== "") {
+      this.shownArticles = this.shownArticles.pipe(map((articleslist: Article[]) => articleslist.filter(a => a.title.toLocaleLowerCase().includes(this.searchTitle.toLocaleLowerCase()))))
     }
   }
 
-  onSelectChange(value)
-  {
+  onSelectChange(value) {
     this.tag = value
-    //this.shownArticles = this.articles.pipe(map((articleslist : Article[]) => articleslist.filter( a => a.tagID.toString() === value)))
   }
 
   showDetailArticle(a: Article) {
+    this.comments = this._articelesService.getCommentsFromArticle(a.articleID)
+    this.likes = this._articelesService.getLikesFromArticle(a.articleID)
     this.selectedArticle = a;
   }
 

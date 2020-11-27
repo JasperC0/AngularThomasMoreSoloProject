@@ -14,7 +14,6 @@ export class PublishArticleComponent implements OnInit {
 
   constructor(private _publishArticleService: PublishArticleService) {
     this.articles = this._publishArticleService.getArticlesFromStatus(2)
-    console.log(this.articles)
   }
 
   ngOnInit(): void {

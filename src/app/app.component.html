@@ -1,31 +1,37 @@
 <nav>
-    <mat-sidenav-container class="nav-container">
+    <mat-sidenav-container autosize class="nav-container">
         <mat-sidenav mode="side" opened="true">
             <mat-nav-list>
                 <a mat-list-item routerLink="/" routerLinkActive="active"
                     [routerLinkActiveOptions]="{ exact: true }">Home</a>
-                <a mat-list-item routerLink="/about" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }">About us</a>
                 <a mat-list-item routerLink="/articles" routerLinkActive="active"
                     [routerLinkActiveOptions]="{ exact: true }">Articles</a>
-                <a mat-list-item routerLink="/edit-article" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }">work on articles</a>
-                <a mat-list-item routerLink="/tags" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }">Tags</a>
-                <a mat-list-item routerLink="/publish-article" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }">Publish Article</a>
-                <a mat-list-item routerLink="/add-journalist" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }">Add Journalist</a>
-                <a mat-list-item routerLink="/delete-journalist" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }">Delete Journalist</a>
-                <a mat-list-item routerLink="/login" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }">Login</a>
-                <a mat-list-item routerLink="/register" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }">Register</a>
+                <div *ngIf="role>1"><a mat-list-item routerLink="/edit-article" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">work on articles</a>
+                    <div *ngIf="role==3"><a mat-list-item routerLink="/tags" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }">Tags</a>
+                        <a mat-list-item routerLink="/publish-article" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }">Publish Article</a>
+                        <a mat-list-item routerLink="/add-journalist" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }">Add Journalist</a>
+                        <a mat-list-item routerLink="/delete-journalist" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }">Delete Journalist</a></div></div>
+                <div *ngIf="role!=1 && role!=2 && role!=3"> <a mat-list-item routerLink="/login"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Login</a>
+                    <a mat-list-item routerLink="/register" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">Register</a></div>
+                <div *ngIf="role==1 || role >1"><a mat-list-item routerLink="/login" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">Change User</a>
+                    <a mat-list-item (click)="logout()">logout</a>
+                </div>
             </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content>
-            <router-outlet></router-outlet>
+            <div id="image">
+                            <div id="body">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
         </mat-sidenav-content>
     </mat-sidenav-container>
 </nav>
