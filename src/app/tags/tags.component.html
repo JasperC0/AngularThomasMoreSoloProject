@@ -22,10 +22,11 @@
 
 
 
-<button (click)="reset()">reset selected tag</button>
+<button mat-raised-button (click)="reset()">reset selected tag</button>
 
 <ul>
-    <li *ngFor="let t of (tags | async)">{{t.name}} <p><button (click)="selectUpdate(t)">select for update</button>
-            <button (click)="deleteTag(t.tagID)">delete</button></p>
+    <li *ngFor="let t of (tags | async)">{{t.name}} <p><button mat-raised-button (click)="selectUpdate(t)">select for update</button>
+        <br/><br/>
+            <button mat-raised-button (click)="deleteTag(t.tagID)">delete</button></p>
     </li>
 </ul>
