@@ -14,11 +14,11 @@
 <p>This article is liked {{likesAmount}} time(s).</p>
 
 <div *ngIf="liked; else notLiked">
-    you have liked this article. <button (click)="likeAndUnlike()"  >Unlike</button>
+    you have liked this article. <button mat-raised-button (click)="likeAndUnlike()"  >Unlike</button>
   </div>
   
   <ng-template #notLiked>
-    you haven't liked this article  <button (click)="likeAndUnlike()"  >Like</button>
+    you haven't liked this article  <button mat-raised-button (click)="likeAndUnlike()"  >Like</button>
   </ng-template>
 
 <ul>

@@ -15,12 +15,12 @@
             <input matInput placeholder="text" type="text" [(ngModel)]="searchBody" name="text" />
         </mat-form-field>
     </p>
-    <p><button>Filter</button></p>
+    <p><button mat-raised-button>Filter</button></p>
 </form>
 
 
 <ul>
-    <li *ngFor="let a of (shownArticles | async)?.reverse()">{{a.title}} <button (click)="showDetailArticle(a)">read
+    <li *ngFor="let a of (shownArticles | async)?.reverse()">{{a.title}} <button mat-raised-button (click)="showDetailArticle(a)">read
             more</button>
         <p>{{a.shortSummary}}</p>
     </li>

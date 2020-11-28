@@ -46,11 +46,11 @@ export class EditArticleComponent implements OnInit {
     //check if article needs to be updated or created
     if (validArticle) {
       if (this.selectedArticle.articleID == 0) {
-        this._editArticelesService.addArticle(this.selectedArticle).subscribe(a => {
+        this._editArticelesService.addArticle(this.selectedArticle).subscribe(() => {
           this.resetArticles()
         })
       }else{
-        this._editArticelesService.updateArticle(this.selectedArticle,this.selectedArticle.articleID).subscribe(a => {
+        this._editArticelesService.updateArticle(this.selectedArticle,this.selectedArticle.articleID).subscribe(() => {
           this.resetArticles()
         })
       }

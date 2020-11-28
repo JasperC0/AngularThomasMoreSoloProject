@@ -19,12 +19,14 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
+
     const checkEmail = this.checkEmail(this.user.email)
 
     if(checkEmail)
     {
-      this._registerService.addUser(this.user).subscribe()
+      this._registerService.addUser(this.user).subscribe(() => {
+        this.submitted = true;    
+      })
     }
     else{
       alert("Please enter valid email!")

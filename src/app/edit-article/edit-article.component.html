@@ -50,5 +50,6 @@
 </form>
 
 <ul>
-    <li *ngFor="let a of (articles | async).reverse()">{{a.title}} <button (click)="update(a)">edit</button><button (click)="delete(a)">delete</button></li>
+    <li *ngFor="let a of (articles | async)?.reverse()">{{a.title}} <button mat-raised-button (click)="update(a)">edit</button><br/><br/>
+    <button mat-raised-button (click)="delete(a)">delete</button></li><br/>
 </ul>

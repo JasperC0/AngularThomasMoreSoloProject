@@ -1,6 +1,6 @@
 <app-publish-article-detail *ngIf="selectedArticle" [article]="selectedArticle"></app-publish-article-detail>
 
 <ul>
-    <li *ngFor="let a of (articles | async)?.reverse()">{{a.title}} <button (click)="showDetailArticle(a)">read article</button>
+    <li *ngFor="let a of (articles | async)?.reverse()">{{a.title}} <button mat-raised-button (click)="showDetailArticle(a)">read article</button>
     </li>
 </ul>
